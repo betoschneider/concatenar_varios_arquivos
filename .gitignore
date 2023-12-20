@@ -1,0 +1,9 @@
+# planilhas excel
+*.xlsx
+
+# banco de dados
+*.db
+
+# diretórios de classe
+/__pycache__/
+
