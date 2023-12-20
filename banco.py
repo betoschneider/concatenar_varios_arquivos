@@ -2,9 +2,13 @@ import sqlalchemy
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy import Column, Integer, String, Double
 
+#cria a engine e conecta ao banco de dados
 engine = sqlalchemy.create_engine('sqlite:///banco.db', echo=True)
+
+# cria a classe base para as declarações da tabela
 Base = declarative_base()
 
+#define a classe do modelo (tabela)
 class Item(Base):
     __tablename__ = 'itens'
 
@@ -15,11 +19,14 @@ class Item(Base):
     def __repr__(self):
         return '<Item(ITEM=%s, VALOR=%s)>' % (self.ITEM, self.VALOR)
     
-
+#cria a tabela no banco de dados
 Base.metadata.create_all(engine)
+
+#cria uma sessão para interagir com o banco de dados
 Session = sessionmaker(bind=engine)
 session = Session()
 
+#define os métodos de inserção, leitura e exclusão
 def inserir_item(item, valor):
     novo_item = Item(ITEM=item, VALOR=valor)
     session.add(novo_item)
